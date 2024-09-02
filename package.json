@@ -1,6 +1,6 @@
 {
-  "name": "my-react-app",
-  "version": "0.1.0",
+  "name": "c-retool-components",
+  "version": "0.2.0", 
   "private": true,
   "dependencies": {
     "@tryretool/custom-component-support": "latest",
