@@ -59,7 +59,7 @@ export const DiffTool: FC = () => {
         </div>
       )}
       <div
-        className="jsondiffpatch-delta"
+        className={`jsondiffpatch-delta${!showUnchanged ? ' hide-unchanged' : ''}`}
         dangerouslySetInnerHTML={{ __html: html }}
       />
     </div>

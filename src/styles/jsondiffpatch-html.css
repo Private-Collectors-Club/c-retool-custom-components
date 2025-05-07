@@ -104,7 +104,7 @@
   margin-left: 0.5em;
 }
 
-/* Hide unchanged nodes for a cleaner diff */
-.jsondiffpatch-unchanged {
+/* Hide unchanged nodes for a cleaner diff, but only when .hide-unchanged is present on a parent */
+.hide-unchanged .jsondiffpatch-unchanged {
   display: none;
 }
