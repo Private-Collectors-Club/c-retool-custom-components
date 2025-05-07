@@ -16,13 +16,10 @@ export const DiffTool: FC = () => {
   })
 
   // Memoize delta calculation and HTML formatting
-  const { delta, html, error } = useMemo(() => {
+  const { delta, error } = useMemo(() => {
     try {
       const delta = jsondiffpatch.diff(diff1 ?? {}, diff2 ?? {})
-      const html = delta
-        ? jsondiffpatch.formatters.html.format(delta, diff1 ?? {})
-        : ''
-      return { delta, html, error: null }
+      return { delta, error: null }
     } catch (e: any) {
       return { delta: null, html: '', error: e?.message || String(e) }
     }
@@ -51,7 +48,6 @@ export const DiffTool: FC = () => {
       <h3>Visual Diff</h3>
       <div
         style={{ maxHeight: 400, overflow: 'auto', background: '#fff', color: '#333', fontSize: 14, border: '1px solid #eee', padding: 8 }}
-        dangerouslySetInnerHTML={{ __html: html }}
       />
     </div>
   )
