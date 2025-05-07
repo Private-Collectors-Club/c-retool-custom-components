@@ -2,7 +2,7 @@ import { useMemo, type FC } from 'react'
 
 import { Retool } from '@tryretool/custom-component-support'
 import * as jsondiffpatch from 'jsondiffpatch'
-import 'jsondiffpatch/public/formatters-styles/html.css'
+import './styles/jsondiffpatch-html.css'
 
 export const DiffTool: FC = () => {
   // diff1

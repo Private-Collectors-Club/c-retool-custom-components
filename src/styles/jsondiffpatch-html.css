@@ -1,0 +1,105 @@
+/*
+ * jsondiffpatch HTML formatter styles
+ * Source: node_modules/jsondiffpatch/public/formatters-styles/html.css
+ */
+
+.jsondiffpatch-delta {
+  font-family: "Menlo", "Consolas", monospace;
+  font-size: 13px;
+  background: #fff;
+  color: #333;
+  line-height: 1.4;
+  padding: 0;
+  margin: 0;
+}
+
+.jsondiffpatch-delta pre {
+  margin: 0;
+  padding: 0;
+  display: inline;
+  font-family: inherit;
+  font-size: inherit;
+  background: inherit;
+  color: inherit;
+}
+
+.jsondiffpatch-delta .jsondiffpatch-unchanged,
+.jsondiffpatch-delta .jsondiffpatch-movedestination {
+  color: #bbb;
+}
+
+.jsondiffpatch-delta .jsondiffpatch-added {
+  background: #e6ffed;
+  color: #22863a;
+}
+
+.jsondiffpatch-delta .jsondiffpatch-deleted {
+  background: #ffeef0;
+  color: #b31d28;
+  text-decoration: line-through;
+}
+
+.jsondiffpatch-delta .jsondiffpatch-modified {
+  background: #fff5b1;
+  color: #b08800;
+}
+
+.jsondiffpatch-delta .jsondiffpatch-moved {
+  background: #f0f0ff;
+  color: #6f42c1;
+}
+
+.jsondiffpatch-delta .jsondiffpatch-unchanged,
+.jsondiffpatch-delta .jsondiffpatch-movedestination {
+  background: #fff;
+}
+
+.jsondiffpatch-delta .jsondiffpatch-textdiff {
+  background: #f8f8f8;
+  color: #333;
+  border: 1px solid #eee;
+  padding: 2px 4px;
+  border-radius: 2px;
+}
+
+.jsondiffpatch-delta .jsondiffpatch-property-name {
+  color: #005cc5;
+}
+
+.jsondiffpatch-delta .jsondiffpatch-property-value {
+  color: #24292e;
+}
+
+.jsondiffpatch-delta .jsondiffpatch-value {
+  color: #24292e;
+}
+
+.jsondiffpatch-delta .jsondiffpatch-child-node-type-array > .jsondiffpatch-property-name:after {
+  content: "[]";
+  color: #bbb;
+}
+
+.jsondiffpatch-delta .jsondiffpatch-child-node-type-object > .jsondiffpatch-property-name:after {
+  content: "{}";
+  color: #bbb;
+}
+
+.jsondiffpatch-delta .jsondiffpatch-children {
+  margin-left: 1.5em;
+}
+
+.jsondiffpatch-delta .jsondiffpatch-unchanged-context {
+  color: #bbb;
+}
+
+.jsondiffpatch-delta .jsondiffpatch-unchanged-context:before {
+  content: "…";
+  color: #bbb;
+  margin-right: 0.5em;
+}
+
+.jsondiffpatch-delta .jsondiffpatch-unchanged-context:after {
+  content: "…";
+  color: #bbb;
+  margin-left: 0.5em;
+}
