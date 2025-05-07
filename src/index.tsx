@@ -34,11 +34,24 @@ export const DiffTool: FC = () => {
       {(!diff1 || !diff2) ? (
         <div>Please enter values for both diffs</div>
       ) : !files[0] || !Array.isArray(files[0].hunks) ? (
-        <div>No diff to display</div>
+        <div>
+          <div>No diff to display</div>
+          <pre style={{ maxHeight: 300, overflow: 'auto', background: '#f8f8f8', color: '#333', fontSize: 12, marginTop: 16 }}>
+            {diffText}
+          </pre>
+        </div>
       ) : (
-        <Diff viewType="split" diffType="modify" hunks={files[0].hunks}>
-          {hunks => hunks.map(hunk => <Hunk key={hunk.content} hunk={hunk} />)}
-        </Diff>
+        <>
+          <Diff viewType="split" diffType="modify" hunks={files[0].hunks}>
+            {hunks => hunks.map(hunk => <Hunk key={hunk.content} hunk={hunk} />)}
+          </Diff>
+          <div style={{ marginTop: 24 }}>
+            <div style={{ fontWeight: 'bold', marginBottom: 4 }}>Raw diffText:</div>
+            <pre style={{ maxHeight: 300, overflow: 'auto', background: '#f8f8f8', color: '#333', fontSize: 12 }}>
+              {diffText}
+            </pre>
+          </div>
+        </>
       )}
     </div>
   )
