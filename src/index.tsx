@@ -2,7 +2,9 @@ import React from 'react'
 import { type FC } from 'react'
 
 import { Retool } from '@tryretool/custom-component-support'
-import ReactDiffViewer, { DiffMethod } from 'react-diff-viewer'
+import { Diff, Hunk, parseDiff } from 'react-diff-view'
+import 'react-diff-view/style/index.css'
+import { createTwoFilesPatch } from 'diff'
 
 export const DiffTool: FC = () => {
   // diff1
@@ -10,23 +12,28 @@ export const DiffTool: FC = () => {
     name: 'diff1',
   })
 
-  //diff2
+  // diff2
   const [diff2, _setDiff2] = Retool.useStateObject({
     name: 'diff2',
   })
+
+  // Convert objects to pretty-printed JSON strings
+  const oldValue = JSON.stringify(diff1, null, 2)
+  const newValue = JSON.stringify(diff2, null, 2)
+
+  // Create a unified diff string
+  const diffText = createTwoFilesPatch('Old', 'New', oldValue, newValue)
+  const files = parseDiff(diffText)
 
   return (
     <div>
       {(!diff1 || !diff2) ? (
         <div>Please enter values for both diffs</div>
       ) : (
-        <ReactDiffViewer
-          compareMethod={DiffMethod.LINES}
-          oldValue={JSON.stringify(diff1, null, 2)}
-          newValue={JSON.stringify(diff2, null, 2)}
-          hideLineNumbers={false}
-          splitView={true} />
+        <Diff viewType="split" diffType="modify" hunks={files[0].hunks}>
+          {hunks => hunks.map(hunk => <Hunk key={hunk.content} hunk={hunk} />)}
+        </Diff>
       )}
     </div>
-  );
+  )
 }
