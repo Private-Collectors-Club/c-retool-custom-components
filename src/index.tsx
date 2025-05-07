@@ -19,8 +19,9 @@ export const DiffTool: FC = () => {
   // Memoize diff calculation and error handling
   const { diffText, files, error } = useMemo(() => {
     try {
-      const oldValue = JSON.stringify(diff1 ?? {}, null, 2)
-      const newValue = JSON.stringify(diff2 ?? {}, null, 2)
+      // Test values for debugging
+      const oldValue = '{\n  "foo": null\n}'
+      const newValue = '{\n  "foo": []\n}'
       const diffText = createTwoFilesPatch('Old', 'New', oldValue, newValue)
       const files = parseDiff(diffText)
       return { diffText, files, error: null }
