@@ -24,11 +24,16 @@ export const DiffTool: FC = () => {
   const diffText = createTwoFilesPatch('Old', 'New', oldValue, newValue)
   const files = parseDiff(diffText)
 
+  // Debug output
+  console.log('diffText:', diffText)
+  console.log('files:', files)
+  console.log('files[0]:', files[0])
+
   return (
     <div>
       {(!diff1 || !diff2) ? (
         <div>Please enter values for both diffs</div>
-      ) : files.length === 0 || !files[0] ? (
+      ) : !files[0] || !Array.isArray(files[0].hunks) ? (
         <div>No diff to display</div>
       ) : (
         <Diff viewType="split" diffType="modify" hunks={files[0].hunks}>
