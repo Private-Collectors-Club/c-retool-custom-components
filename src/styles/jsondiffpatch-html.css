@@ -128,6 +128,13 @@
   border-radius: 3px;
 }
 
+/* Hide list item bullets in the diff output */
+.jsondiffpatch-delta ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin-left: 0;
+}
+
 /* Differentiate left (old) and right (new) values in modified fields */
 .jsondiffpatch-delta .jsondiffpatch-left-value {
   background: #ffe0e0 !important;
