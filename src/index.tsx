@@ -2,6 +2,7 @@ import { useMemo, type FC } from 'react'
 
 import { Retool } from '@tryretool/custom-component-support'
 import * as jsondiffpatch from 'jsondiffpatch'
+// @ts-ignore
 import * as htmlFormatter from 'jsondiffpatch/formatters/html'
 import './styles/jsondiffpatch-html.css'
 
