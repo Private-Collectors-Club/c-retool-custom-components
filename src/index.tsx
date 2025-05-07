@@ -68,21 +68,12 @@ export const DiffTool: FC = () => {
       </pre>
       <h3>Delta (JSON)</h3>
       <pre style={{ maxHeight: 300, overflow: 'auto', background: '#f8f8f8', color: '#333', fontSize: 12 }}>
-        {delta ? JSON.stringify(delta, null, 2) : '(No delta)'}
+        {JSON.stringify(delta, null, 2)}
       </pre>
       <h3>Visual Diff</h3>
-      <div
-        style={{
-          maxHeight: 400,
-          overflow: 'auto',
-          background: '#fff',
-          color: '#333',
-          fontSize: 14,
-          border: '1px solid #eee',
-          padding: 8,
-        }}
-        dangerouslySetInnerHTML={{ __html: html }}
-      />
+      <div>
+        (Visual diff temporarily disabled for debugging)
+      </div>
     </div>
   )
 }
