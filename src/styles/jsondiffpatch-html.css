@@ -29,19 +29,25 @@
 }
 
 .jsondiffpatch-delta .jsondiffpatch-added {
-  background: #e6ffed;
-  color: #22863a;
+  background: #d4f8db !important;   /* Brighter green background */
+  color: #22863a !important;         /* Darker green text */
+  font-weight: bold;
+  border-left: 4px solid #22863a;
 }
 
 .jsondiffpatch-delta .jsondiffpatch-deleted {
-  background: #ffeef0;
-  color: #b31d28;
-  text-decoration: line-through;
+  background: #ffe0e0 !important;    /* Brighter red background */
+  color: #b31d28 !important;         /* Darker red text */
+  font-weight: bold;
+  border-left: 4px solid #b31d28;
+  text-decoration: line-through !important;
 }
 
 .jsondiffpatch-delta .jsondiffpatch-modified {
-  background: #fff5b1;
-  color: #b08800;
+  background: #fff5b1 !important;    /* Yellow background */
+  color: #b08800 !important;         /* Dark yellow text */
+  font-weight: bold;
+  border-left: 4px solid #b08800;
 }
 
 .jsondiffpatch-delta .jsondiffpatch-moved {
@@ -105,23 +111,13 @@
 }
 
 /* Hide unchanged nodes for a cleaner diff, but only when .hide-unchanged is present on a parent */
-.jsondiffpatch-delta .jsondiffpatch-unchanged {
+.jsondiffpatch-delta.hide-unchanged .jsondiffpatch-unchanged {
   display: none !important;
 }
 
-/* Stronger coloring for diff types */
-.jsondiffpatch-delta .jsondiffpatch-modified {
-  background: #fff5b1 !important;
-  color: #b08800 !important;
-}
-
-.jsondiffpatch-delta .jsondiffpatch-added {
-  background: #e6ffed !important;
-  color: #22863a !important;
-}
-
-.jsondiffpatch-delta .jsondiffpatch-deleted {
-  background: #ffeef0 !important;
-  color: #b31d28 !important;
-  text-decoration: line-through !important;
+/* Optional: Add padding for readability */
+.jsondiffpatch-delta li {
+  padding: 2px 8px;
+  margin: 2px 0;
+  border-radius: 3px;
 }
