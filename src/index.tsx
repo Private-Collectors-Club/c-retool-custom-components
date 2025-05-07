@@ -3,7 +3,7 @@ import { useMemo, type FC } from 'react'
 import { Retool } from '@tryretool/custom-component-support'
 import { Diff, Hunk, parseDiff } from 'react-diff-view'
 import 'react-diff-view/style/index.css'
-import { createTwoFilesPatch } from 'diff'
+import { diffLines } from 'diff'
 
 export const DiffTool: FC = () => {
   // diff1
@@ -17,16 +17,15 @@ export const DiffTool: FC = () => {
   })
 
   // Memoize diff calculation and error handling
-  const { diffText, files, error } = useMemo(() => {
+  const { diffLinesOutput, error } = useMemo(() => {
     try {
       // Test values for debugging
       const oldValue = '{\n  "foo": null\n}'
       const newValue = '{\n  "foo": []\n}'
-      const diffText = createTwoFilesPatch('Old', 'New', oldValue, newValue)
-      const files = parseDiff(diffText)
-      return { diffText, files, error: null }
+      const diffLinesOutput = diffLines(oldValue, newValue)
+      return { diffLinesOutput, error: null }
     } catch (e: any) {
-      return { diffText: '', files: [], error: e?.message || String(e) }
+      return { diffLinesOutput: [], error: e?.message || String(e) }
     }
   }, [diff1, diff2])
 
@@ -46,9 +45,11 @@ export const DiffTool: FC = () => {
       <pre style={{ maxHeight: 150, overflow: 'auto', background: '#f0f0f0', color: '#333', fontSize: 12 }}>
         {JSON.stringify(diff2 ?? {}, null, 2)}
       </pre>
-      <h3>createTwoFilesPatch output</h3>
+      <h3>diffLines output</h3>
       <pre style={{ maxHeight: 300, overflow: 'auto', background: '#f8f8f8', color: '#333', fontSize: 12 }}>
-        {diffText ? diffText : '(No diffText generated)'}
+        {diffLinesOutput && diffLinesOutput.length
+          ? JSON.stringify(diffLinesOutput, null, 2)
+          : '(No diffLines output)'}
       </pre>
       <div>
         <h3>Diff Output</h3>
