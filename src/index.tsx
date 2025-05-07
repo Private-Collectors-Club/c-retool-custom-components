@@ -2,7 +2,6 @@ import { useMemo, type FC } from 'react'
 
 import { Retool } from '@tryretool/custom-component-support'
 import * as jsondiffpatch from 'jsondiffpatch'
-import { formatters } from 'jsondiffpatch'
 import './styles/jsondiffpatch-html.css'
 
 export const DiffTool: FC = () => {
@@ -38,7 +37,7 @@ export const DiffTool: FC = () => {
     try {
       const delta = jsondiffpatch.diff(parsed1 ?? {}, parsed2 ?? {})
       const html = delta
-        ? formatters.html.format(delta, parsed1 ?? {})
+        ? (jsondiffpatch as any).formatters.html.format(delta, parsed1 ?? {})
         : ''
       return { delta, html, error: null }
     } catch (e: any) {
