@@ -74,12 +74,12 @@
   color: #24292e;
 }
 
-.jsondiffpatch-delta .jsondiffpatch-child-node-type-array > .jsondiffpatch-property-name:after {
+.jsondiffpatch-delta .jsondiffpatch-child-node-type-array>.jsondiffpatch-property-name:after {
   content: "[]";
   color: #bbb;
 }
 
-.jsondiffpatch-delta .jsondiffpatch-child-node-type-object > .jsondiffpatch-property-name:after {
+.jsondiffpatch-delta .jsondiffpatch-child-node-type-object>.jsondiffpatch-property-name:after {
   content: "{}";
   color: #bbb;
 }
@@ -105,7 +105,7 @@
 }
 
 /* Hide unchanged nodes for a cleaner diff, but only when .hide-unchanged is present on a parent */
-.jsondiffpatch-delta.hide-unchanged .jsondiffpatch-unchanged {
+.jsondiffpatch-delta .jsondiffpatch-unchanged {
   display: none !important;
 }
 
@@ -114,10 +114,12 @@
   background: #fff5b1 !important;
   color: #b08800 !important;
 }
+
 .jsondiffpatch-delta .jsondiffpatch-added {
   background: #e6ffed !important;
   color: #22863a !important;
 }
+
 .jsondiffpatch-delta .jsondiffpatch-deleted {
   background: #ffeef0 !important;
   color: #b31d28 !important;
