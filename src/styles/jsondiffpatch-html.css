@@ -105,6 +105,21 @@
 }
 
 /* Hide unchanged nodes for a cleaner diff, but only when .hide-unchanged is present on a parent */
-.hide-unchanged .jsondiffpatch-unchanged {
-  display: none;
+.jsondiffpatch-delta.hide-unchanged .jsondiffpatch-unchanged {
+  display: none !important;
+}
+
+/* Stronger coloring for diff types */
+.jsondiffpatch-delta .jsondiffpatch-modified {
+  background: #fff5b1 !important;
+  color: #b08800 !important;
+}
+.jsondiffpatch-delta .jsondiffpatch-added {
+  background: #e6ffed !important;
+  color: #22863a !important;
+}
+.jsondiffpatch-delta .jsondiffpatch-deleted {
+  background: #ffeef0 !important;
+  color: #b31d28 !important;
+  text-decoration: line-through !important;
 }
