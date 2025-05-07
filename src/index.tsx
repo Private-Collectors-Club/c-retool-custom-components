@@ -62,18 +62,6 @@ export const DiffTool: FC = () => {
       <pre style={{ maxHeight: 150, overflow: 'auto', background: '#f0f0f0', color: '#333', fontSize: 12 }}>
         {JSON.stringify(diff2 ?? {}, null, 2)}
       </pre>
-      <h4>Debug Info</h4>
-      <pre style={{ maxHeight: 200, overflow: 'auto', background: '#ffe', color: '#a33', fontSize: 11 }}>
-        parsed1: {JSON.stringify(parsed1)}
-        parsed2: {JSON.stringify(parsed2)}
-        delta: {JSON.stringify(delta)}
-        html: {html}
-        error: {error}
-      </pre>
-      <h3>Delta (JSON)</h3>
-      <pre style={{ maxHeight: 300, overflow: 'auto', background: '#f8f8f8', color: '#333', fontSize: 12 }}>
-        {JSON.stringify(delta, null, 2)}
-      </pre>
       <h3>Visual Diff</h3>
       <div
         className="jsondiffpatch-delta"
