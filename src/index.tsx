@@ -20,7 +20,7 @@ export const DiffTool: FC = () => {
     try {
       const delta = jsondiffpatch.diff(diff1 ?? {}, diff2 ?? {})
       const html = delta
-        ? jsondiffpatch.formatters.html.format(delta, diff1 ?? {})
+        ? (jsondiffpatch as any).formatters.html.format(delta, diff1 ?? {})
         : ''
       return { delta, html, error: null }
     } catch (e: any) {
