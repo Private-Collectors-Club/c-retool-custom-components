@@ -18,8 +18,8 @@ export const DiffTool: FC = () => {
   })
 
   // Convert objects to pretty-printed JSON strings
-  const oldValue = JSON.stringify(diff1, null, 2)
-  const newValue = JSON.stringify(diff2, null, 2)
+  const oldValue = JSON.stringify(diff1 ?? {}, null, 2)
+  const newValue = JSON.stringify(diff2 ?? {}, null, 2)
 
   // Create a unified diff string
   const diffText = createTwoFilesPatch('Old', 'New', oldValue, newValue)
@@ -29,6 +29,8 @@ export const DiffTool: FC = () => {
     <div>
       {(!diff1 || !diff2) ? (
         <div>Please enter values for both diffs</div>
+      ) : files.length === 0 || !files[0] ? (
+        <div>No diff to display</div>
       ) : (
         <Diff viewType="split" diffType="modify" hunks={files[0].hunks}>
           {hunks => hunks.map(hunk => <Hunk key={hunk.content} hunk={hunk} />)}
