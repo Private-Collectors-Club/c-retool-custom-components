@@ -1,0 +1,66 @@
+/*
+ * jsondiffpatch Annotated formatter styles
+ * Source: node_modules/jsondiffpatch/public/formatters-styles/annotated.css
+ */
+
+.jsondiffpatch-annotated {
+  font-family: "Menlo", "Consolas", monospace;
+  font-size: 13px;
+  background: #fff;
+  color: #333;
+  line-height: 1.4;
+  padding: 0;
+  margin: 0;
+}
+
+.jsondiffpatch-annotated .jsondiffpatch-delta {
+  margin-left: 1.5em;
+}
+
+.jsondiffpatch-annotated .jsondiffpatch-property-name {
+  color: #005cc5;
+}
+
+.jsondiffpatch-annotated .jsondiffpatch-property-value {
+  color: #24292e;
+}
+
+.jsondiffpatch-annotated .jsondiffpatch-value {
+  color: #24292e;
+}
+
+.jsondiffpatch-annotated .jsondiffpatch-added {
+  background: #e6ffed;
+  color: #22863a;
+}
+
+.jsondiffpatch-annotated .jsondiffpatch-deleted {
+  background: #ffeef0;
+  color: #b31d28;
+  text-decoration: line-through;
+}
+
+.jsondiffpatch-annotated .jsondiffpatch-modified {
+  background: #fff5b1;
+  color: #b08800;
+}
+
+.jsondiffpatch-annotated .jsondiffpatch-unchanged {
+  color: #bbb;
+}
+
+.jsondiffpatch-annotated .jsondiffpatch-unchanged-context {
+  color: #bbb;
+}
+
+.jsondiffpatch-annotated .jsondiffpatch-unchanged-context:before {
+  content: "…";
+  color: #bbb;
+  margin-right: 0.5em;
+}
+
+.jsondiffpatch-annotated .jsondiffpatch-unchanged-context:after {
+  content: "…";
+  color: #bbb;
+  margin-left: 0.5em;
+}
