@@ -11,6 +11,10 @@
   "engines": {
     "node": ">=20.0.0"
   },
+  "scripts": {
+    "dev": "npx retool-ccl dev",
+    "deploy": "npx retool-ccl deploy"
+  },
   "browserslist": {
     "production": [
       ">0.2%",
