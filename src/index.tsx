@@ -48,13 +48,11 @@ export const DiffTool: FC = () => {
 
   return (
     <div>
-      <h2>Retool JSON Diff Viewer (jsondiffpatch)</h2>
       {error && (
         <div style={{ color: 'red', marginBottom: 12 }}>
           <strong>Error:</strong> {error}
         </div>
       )}
-      <h3>Visual Diff</h3>
       <div
         className="jsondiffpatch-delta"
         dangerouslySetInnerHTML={{ __html: html }}
