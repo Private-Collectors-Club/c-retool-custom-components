@@ -1,4 +1,4 @@
-import { type FC } from 'react'
+import { useState, type FC } from 'react'
 
 import { Retool } from '@tryretool/custom-component-support'
 import { Diff, Hunk, parseDiff } from 'react-diff-view'
@@ -20,17 +20,27 @@ export const DiffTool: FC = () => {
   const oldValue = JSON.stringify(diff1 ?? {}, null, 2)
   const newValue = JSON.stringify(diff2 ?? {}, null, 2)
 
-  // Create a unified diff string
-  const diffText = createTwoFilesPatch('Old', 'New', oldValue, newValue)
-  const files = parseDiff(diffText)
+  // State for error
+  const [error, setError] = useState<string | null>(null)
+  let diffText = ''
+  let files: any[] = []
 
-  // Debug output
-  console.log('diffText:', diffText)
-  console.log('files:', files)
-  console.log('files[0]:', files[0])
+  try {
+    diffText = createTwoFilesPatch('Old', 'New', oldValue, newValue)
+    files = parseDiff(diffText)
+    setError(null)
+  } catch (e: any) {
+    setError(e?.message || String(e))
+    files = []
+  }
 
   return (
     <div>
+      {error && (
+        <div style={{ color: 'red', marginBottom: 12 }}>
+          <strong>Error:</strong> {error}
+        </div>
+      )}
       {(!diff1 || !diff2) ? (
         <div>Please enter values for both diffs</div>
       ) : !files[0] || !Array.isArray(files[0].hunks) ? (
