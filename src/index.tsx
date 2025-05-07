@@ -28,10 +28,10 @@ export const DiffTool: FC = () => {
     return obj
   }
 
-  //const parsed1 = safeParse(diff1)
-  //const parsed2 = safeParse(diff2)
-  const parsed1 = { "hello": 123 };
-  const parsed2 = { "hello": 456 };
+  const parsed1 = safeParse(diff1)
+  const parsed2 = safeParse(diff2)
+  //const parsed1 = { "hello": 123 };
+  //const parsed2 = { "hello": 456 };
 
   // Memoize delta calculation and HTML formatting
   const { delta, html, error } = useMemo(() => {
