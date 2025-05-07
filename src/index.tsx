@@ -1,4 +1,3 @@
-import React from 'react'
 import { type FC } from 'react'
 
 import { Retool } from '@tryretool/custom-component-support'
