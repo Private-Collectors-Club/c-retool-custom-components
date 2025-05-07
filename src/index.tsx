@@ -1,4 +1,4 @@
-import { useState, type FC } from 'react'
+import { useMemo, type FC } from 'react'
 
 import { Retool } from '@tryretool/custom-component-support'
 import { Diff, Hunk, parseDiff } from 'react-diff-view'
@@ -16,23 +16,18 @@ export const DiffTool: FC = () => {
     name: 'diff2',
   })
 
-  // Convert objects to pretty-printed JSON strings
-  const oldValue = JSON.stringify(diff1 ?? {}, null, 2)
-  const newValue = JSON.stringify(diff2 ?? {}, null, 2)
-
-  // State for error
-  const [error, setError] = useState<string | null>(null)
-  let diffText = ''
-  let files: any[] = []
-
-  try {
-    diffText = createTwoFilesPatch('Old', 'New', oldValue, newValue)
-    files = parseDiff(diffText)
-    setError(null)
-  } catch (e: any) {
-    setError(e?.message || String(e))
-    files = []
-  }
+  // Memoize diff calculation and error handling
+  const { diffText, files, error } = useMemo(() => {
+    try {
+      const oldValue = JSON.stringify(diff1 ?? {}, null, 2)
+      const newValue = JSON.stringify(diff2 ?? {}, null, 2)
+      const diffText = createTwoFilesPatch('Old', 'New', oldValue, newValue)
+      const files = parseDiff(diffText)
+      return { diffText, files, error: null }
+    } catch (e: any) {
+      return { diffText: '', files: [], error: e?.message || String(e) }
+    }
+  }, [diff1, diff2])
 
   return (
     <div>
