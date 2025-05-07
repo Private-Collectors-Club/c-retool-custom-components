@@ -1,12 +1,12 @@
 {
   "name": "c-retool-components",
-  "version": "0.2.0", 
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
     "@tryretool/custom-component-support": "latest",
-    "react": "^18.2.0",
-    "react-diff-view": "^3.1.0",
     "diff": "^5.2.0",
+    "react": "^18.3.1",
+    "react-diff-view": "^3.3.1",
     "react-dom": "^18.2.0"
   },
   "engines": {
@@ -29,6 +29,7 @@
     ]
   },
   "devDependencies": {
+    "@types/diff": "^7.0.2",
     "@types/react": "^18.2.55",
     "@typescript-eslint/eslint-plugin": "^7.3.1",
     "@typescript-eslint/parser": "^7.3.1",
