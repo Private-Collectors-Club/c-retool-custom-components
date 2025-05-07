@@ -17,6 +17,8 @@ export const DiffTool: FC = () => {
 
   // Memoize delta calculation and HTML formatting
   const { delta, html, error } = useMemo(() => {
+    console.log('diff1:', diff1)
+    console.log('diff2:', diff2)
     try {
       const delta = jsondiffpatch.diff(diff1 ?? {}, diff2 ?? {})
       const html = delta
@@ -43,6 +45,11 @@ export const DiffTool: FC = () => {
       <h3>New Value (diff2)</h3>
       <pre style={{ maxHeight: 150, overflow: 'auto', background: '#f0f0f0', color: '#333', fontSize: 12 }}>
         {JSON.stringify(diff2 ?? {}, null, 2)}
+      </pre>
+      <h4>Debug: Raw diff1 and diff2</h4>
+      <pre style={{ maxHeight: 100, overflow: 'auto', background: '#ffe', color: '#a33', fontSize: 11 }}>
+        diff1: {JSON.stringify(diff1)}
+        diff2: {JSON.stringify(diff2)}
       </pre>
       <h3>Delta (JSON)</h3>
       <pre style={{ maxHeight: 300, overflow: 'auto', background: '#f8f8f8', color: '#333', fontSize: 12 }}>
