@@ -29,23 +29,29 @@
 }
 
 .jsondiffpatch-delta .jsondiffpatch-added {
-  background: #d4f8db !important;   /* Brighter green background */
-  color: #22863a !important;         /* Darker green text */
+  background: #d4f8db !important;
+  /* Brighter green background */
+  color: #22863a !important;
+  /* Darker green text */
   font-weight: bold;
   border-left: 4px solid #22863a;
 }
 
 .jsondiffpatch-delta .jsondiffpatch-deleted {
-  background: #ffe0e0 !important;    /* Brighter red background */
-  color: #b31d28 !important;         /* Darker red text */
+  background: #ffe0e0 !important;
+  /* Brighter red background */
+  color: #b31d28 !important;
+  /* Darker red text */
   font-weight: bold;
   border-left: 4px solid #b31d28;
   text-decoration: line-through !important;
 }
 
 .jsondiffpatch-delta .jsondiffpatch-modified {
-  background: #fff5b1 !important;    /* Yellow background */
-  color: #b08800 !important;         /* Dark yellow text */
+  background: #fff5b1 !important;
+  /* Yellow background */
+  color: #b08800 !important;
+  /* Dark yellow text */
   font-weight: bold;
   border-left: 4px solid #b08800;
 }
@@ -111,7 +117,7 @@
 }
 
 /* Hide unchanged nodes for a cleaner diff, but only when .hide-unchanged is present on a parent */
-.jsondiffpatch-delta.hide-unchanged .jsondiffpatch-unchanged {
+.jsondiffpatch-delta .jsondiffpatch-unchanged {
   display: none !important;
 }
 
@@ -124,8 +130,10 @@
 
 /* Differentiate left (old) and right (new) values in modified fields */
 .jsondiffpatch-delta .jsondiffpatch-left-value {
-  background: #ffe0e0 !important;   /* Light red background for "from" */
-  color: #b31d28 !important;        /* Red text */
+  background: #ffe0e0 !important;
+  /* Light red background for "from" */
+  color: #b31d28 !important;
+  /* Red text */
   border-radius: 3px;
   margin-right: 8px;
   display: inline-block;
@@ -133,8 +141,10 @@
 }
 
 .jsondiffpatch-delta .jsondiffpatch-right-value {
-  background: #d4f8db !important;   /* Light green background for "to" */
-  color: #22863a !important;        /* Green text */
+  background: #d4f8db !important;
+  /* Light green background for "to" */
+  color: #22863a !important;
+  /* Green text */
   border-radius: 3px;
   margin-left: 8px;
   display: inline-block;
@@ -142,7 +152,7 @@
 }
 
 .jsondiffpatch-delta .jsondiffpatch-left-value::before {
-  content: "from ";
+  content: "";
   color: #b31d28;
   font-size: 11px;
   font-weight: bold;
@@ -150,7 +160,7 @@
 }
 
 .jsondiffpatch-delta .jsondiffpatch-right-value::before {
-  content: "to ";
+  content: "";
   color: #22863a;
   font-size: 11px;
   font-weight: bold;
