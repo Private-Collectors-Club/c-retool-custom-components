@@ -128,11 +128,25 @@
   border-radius: 3px;
 }
 
-/* Hide list item bullets in the diff output */
+/* Hide list item bullets in the diff output and restore indentation with a custom marker */
 .jsondiffpatch-delta ul {
   list-style-type: none;
-  padding-left: 0;
+  padding-left: 1.2em;
   margin-left: 0;
+}
+
+.jsondiffpatch-delta li {
+  position: relative;
+}
+
+.jsondiffpatch-delta li::before {
+  content: ">";
+  position: absolute;
+  left: 0;
+  color: #bbb;
+  font-size: 13px;
+  font-weight: bold;
+  font-family: inherit;
 }
 
 /* Differentiate left (old) and right (new) values in modified fields */
