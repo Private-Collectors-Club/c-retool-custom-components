@@ -33,18 +33,26 @@ export const DiffTool: FC = () => {
   //const parsed1 = { "hello": 123 };
   //const parsed2 = { "hello": 456 };
 
+  // Add Retool state for toggling unchanged output
+  const [showUnchanged] = Retool.useStateObject({
+    name: 'showUnchanged',
+  })
+
   // Memoize delta calculation and HTML formatting
   const { delta, html, error } = useMemo(() => {
     try {
       const delta = jsondiffpatch.diff(parsed1 ?? {}, parsed2 ?? {})
       const html = delta
-        ? htmlFormatter.format(delta, parsed1 ?? {})
+        ? htmlFormatter.format(delta, parsed1 ?? {}, {
+            showUnchanged: !!showUnchanged,
+            unchangedContext: 0,
+          })
         : ''
       return { delta, html, error: null }
     } catch (e: any) {
       return { delta: null, html: '', error: e?.message || String(e) }
     }
-  }, [diff1, diff2])
+  }, [diff1, diff2, showUnchanged])
 
   return (
     <div>
