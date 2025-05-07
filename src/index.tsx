@@ -15,14 +15,29 @@ export const DiffTool: FC = () => {
     name: 'diff2',
   })
 
+  // Safe parse function to handle stringified JSON
+  function safeParse(obj: any) {
+    if (typeof obj === 'string') {
+      try {
+        return JSON.parse(obj)
+      } catch {
+        return obj
+      }
+    }
+    return obj
+  }
+
+  const parsed1 = safeParse(diff1)
+  const parsed2 = safeParse(diff2)
+
   // Memoize delta calculation and HTML formatting
   const { delta, html, error } = useMemo(() => {
-    console.log('diff1:', diff1)
-    console.log('diff2:', diff2)
+    console.log('parsed1:', parsed1)
+    console.log('parsed2:', parsed2)
     try {
-      const delta = jsondiffpatch.diff(diff1 ?? {}, diff2 ?? {})
+      const delta = jsondiffpatch.diff(parsed1 ?? {}, parsed2 ?? {})
       const html = delta
-        ? (jsondiffpatch as any).formatters.html.format(delta, diff1 ?? {})
+        ? (jsondiffpatch as any).formatters.html.format(delta, parsed1 ?? {})
         : ''
       return { delta, html, error: null }
     } catch (e: any) {
@@ -46,10 +61,10 @@ export const DiffTool: FC = () => {
       <pre style={{ maxHeight: 150, overflow: 'auto', background: '#f0f0f0', color: '#333', fontSize: 12 }}>
         {JSON.stringify(diff2 ?? {}, null, 2)}
       </pre>
-      <h4>Debug: Raw diff1 and diff2</h4>
+      <h4>Debug: Parsed diff1 and diff2</h4>
       <pre style={{ maxHeight: 100, overflow: 'auto', background: '#ffe', color: '#a33', fontSize: 11 }}>
-        diff1: {JSON.stringify(diff1)}
-        diff2: {JSON.stringify(diff2)}
+        parsed1: {JSON.stringify(parsed1)}
+        parsed2: {JSON.stringify(parsed2)}
       </pre>
       <h3>Delta (JSON)</h3>
       <pre style={{ maxHeight: 300, overflow: 'auto', background: '#f8f8f8', color: '#333', fontSize: 12 }}>
