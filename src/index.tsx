@@ -19,9 +19,8 @@ export const DiffTool: FC = () => {
   // Memoize diff calculation and error handling
   const { diffLinesOutput, error } = useMemo(() => {
     try {
-      // Test values for debugging
-      const oldValue = '{\n  "foo": null\n}'
-      const newValue = '{\n  "foo": []\n}'
+      const oldValue = JSON.stringify(diff1 ?? {}, null, 2)
+      const newValue = JSON.stringify(diff2 ?? {}, null, 2)
       const diffLinesOutput = diffLines(oldValue, newValue)
       return { diffLinesOutput, error: null }
     } catch (e: any) {
