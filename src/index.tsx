@@ -44,9 +44,9 @@ export const DiffTool: FC = () => {
       const delta = jsondiffpatch.diff(parsed1 ?? {}, parsed2 ?? {})
       const html = delta
         ? htmlFormatter.format(delta, parsed1 ?? {}, {
-            showUnchanged: !!showUnchanged,
-            unchangedContext: 0,
-          })
+          showUnchanged: !!showUnchanged,
+          unchangedContext: 0,
+        })
         : ''
       return { delta, html, error: null }
     } catch (e: any) {
