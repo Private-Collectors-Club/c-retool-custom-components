@@ -27,13 +27,13 @@ export const DiffTool: FC = () => {
     return obj
   }
 
-  const parsed1 = safeParse(diff1)
-  const parsed2 = safeParse(diff2)
+  //const parsed1 = safeParse(diff1)
+  //const parsed2 = safeParse(diff2)
+  const parsed1 = { "hello": 123 };
+  const parsed2 = { "hello": 456 };
 
   // Memoize delta calculation and HTML formatting
   const { delta, html, error } = useMemo(() => {
-    console.log('parsed1:', parsed1)
-    console.log('parsed2:', parsed2)
     try {
       const delta = jsondiffpatch.diff(parsed1 ?? {}, parsed2 ?? {})
       const html = delta
