@@ -37,21 +37,22 @@ export const DiffTool: FC = () => {
           <strong>Error:</strong> {error}
         </div>
       )}
-      <h3>Raw diffText</h3>
-      <pre style={{ maxHeight: 300, overflow: 'auto', background: '#f8f8f8', color: '#333', fontSize: 12 }}>
-        {diffText}
+      <h3>Old Value (diff1)</h3>
+      <pre style={{ maxHeight: 150, overflow: 'auto', background: '#f0f0f0', color: '#333', fontSize: 12 }}>
+        {JSON.stringify(diff1 ?? {}, null, 2)}
       </pre>
-      {(!diff1 || !diff2) ? (
-        <div>
-          <h3>Input Status</h3>
-          <div>Please enter values for both diffs</div>
-        </div>
-      ) : (
-        <div>
-          <h3>Diff Output</h3>
-          <div>Diff rendering is temporarily disabled for debugging.</div>
-        </div>
-      )}
+      <h3>New Value (diff2)</h3>
+      <pre style={{ maxHeight: 150, overflow: 'auto', background: '#f0f0f0', color: '#333', fontSize: 12 }}>
+        {JSON.stringify(diff2 ?? {}, null, 2)}
+      </pre>
+      <h3>createTwoFilesPatch output</h3>
+      <pre style={{ maxHeight: 300, overflow: 'auto', background: '#f8f8f8', color: '#333', fontSize: 12 }}>
+        {diffText ? diffText : '(No diffText generated)'}
+      </pre>
+      <div>
+        <h3>Diff Output</h3>
+        <div>Diff rendering is temporarily disabled for debugging.</div>
+      </div>
     </div>
   )
 }
