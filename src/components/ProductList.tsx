@@ -60,8 +60,15 @@ const ProductDropZone: FC<{
         transition: 'background 0.2s, border 0.2s',
       }}
     >
-      <div style={{ fontWeight: 600, marginBottom: 8 }}>
-        {product.name || product.id}
+      <div style={{ marginBottom: 8 }}>
+        <div style={{ fontWeight: 600, fontSize: 16 }}>
+          {product.name || product.id}
+        </div>
+        {product.scheme_name && (
+          <div style={{ color: '#555', fontSize: 13 }}>
+            Scheme: {product.scheme_name}
+          </div>
+        )}
       </div>
       {vehicles.length === 0 ? (
         <div style={{ color: '#888', fontStyle: 'italic' }}>No vehicles assigned</div>
