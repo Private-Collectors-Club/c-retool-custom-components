@@ -68,7 +68,9 @@ const ProductDropZone: FC<{
       ) : (
         vehicles.map((v) => (
           <div key={v.id} style={{ display: 'flex', alignItems: 'center', marginBottom: 6 }}>
-            <DraggableVehicle vehicle={v} />
+            <div style={{ flex: 1, display: 'flex', alignItems: 'center' }}>
+              <DraggableVehicle vehicle={v} dragOnlyName />
+            </div>
             <button
               style={{
                 marginLeft: 8,

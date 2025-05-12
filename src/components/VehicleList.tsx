@@ -31,7 +31,7 @@ export const VehicleList: FC<VehicleListProps> = ({ vehicles }) => {
   )
 }
 
-export const DraggableVehicle: FC<{ vehicle: any }> = ({ vehicle }) => {
+export const DraggableVehicle: FC<{ vehicle: any; dragOnlyName?: boolean }> = ({ vehicle, dragOnlyName }) => {
   const [{ isDragging }, drag] = useDrag({
     type: VEHICLE_TYPE,
     item: { id: vehicle.id },
@@ -39,6 +39,21 @@ export const DraggableVehicle: FC<{ vehicle: any }> = ({ vehicle }) => {
       isDragging: monitor.isDragging(),
     }),
   })
+
+  if (dragOnlyName) {
+    return (
+      <span
+        ref={drag}
+        style={{
+          opacity: isDragging ? 0.5 : 1,
+          cursor: 'grab',
+          fontWeight: 500,
+        }}
+      >
+        {vehicle.name || vehicle.id}
+      </span>
+    )
+  }
 
   return (
     <div
