@@ -21,18 +21,15 @@ export const QuoteBuilder: FC = () => {
   const safeProducts = Array.isArray(products) ? products : []
 
   // Compute unassigned vehicles
-  const unassignedVehicles = useMemo(
-    () =>
-      safeVehicles.filter(
-        (v: any) =>
-          !Object.prototype.hasOwnProperty.call(assignments, v.id) ||
-          !safeProducts.some((p: any) => p.id === assignments[v.id])
-      ),
-    [safeVehicles, assignments, safeProducts]
-  )
+  const unassignedVehicles =
+    safeVehicles.filter(
+      (v: any) =>
+        !Object.prototype.hasOwnProperty.call(assignments, v.id) ||
+        !safeProducts.some((p: any) => p.id === assignments[v.id])
+    )
 
   // Compute assigned vehicles per product
-  const vehiclesByProduct = useMemo(() => {
+  const vehiclesByProduct = (() => {
     const map: Record<string, any[]> = {}
     safeProducts.forEach((p: any) => {
       map[p.id] = []
@@ -44,7 +41,7 @@ export const QuoteBuilder: FC = () => {
       }
     })
     return map
-  }, [safeVehicles, assignments, safeProducts])
+  })()
 
   // Handler for assigning a vehicle to a product
   const handleAssign = (vehicleId: string, productId: string) => {
