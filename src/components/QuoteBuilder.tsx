@@ -7,8 +7,8 @@ import { ProductList } from './ProductList'
 
 export const QuoteBuilder: FC = () => {
   // Inputs from Retool
-  const [vehicles = []] = Retool.useStateArray({ name: 'vehicles' })
-  const [products = []] = Retool.useStateArray({ name: 'products' })
+  const [vehicles] = Retool.useStateArray({ name: 'vehicles' })
+  const [products] = Retool.useStateArray({ name: 'products' })
 
   // assignments: { [vehicleId]: productId }
   const [assignments, setAssignments] = Retool.useStateObject({
@@ -16,31 +16,35 @@ export const QuoteBuilder: FC = () => {
     initialValue: {},
   })
 
+  // Always use safe arrays for vehicles/products
+  const safeVehicles = Array.isArray(vehicles) ? vehicles : []
+  const safeProducts = Array.isArray(products) ? products : []
+
   // Compute unassigned vehicles
   const unassignedVehicles = useMemo(
     () =>
-      (Array.isArray(vehicles) ? vehicles : []).filter(
+      safeVehicles.filter(
         (v: any) =>
           !Object.prototype.hasOwnProperty.call(assignments, v.id) ||
-          !(Array.isArray(products) ? products : []).some((p: any) => p.id === assignments[v.id])
+          !safeProducts.some((p: any) => p.id === assignments[v.id])
       ),
-    [vehicles, assignments, products]
+    [safeVehicles, assignments, safeProducts]
   )
 
   // Compute assigned vehicles per product
   const vehiclesByProduct = useMemo(() => {
     const map: Record<string, any[]> = {}
-      (Array.isArray(products) ? products : []).forEach((p: any) => {
-        map[p.id] = []
-      })
-      (Array.isArray(vehicles) ? vehicles : []).forEach((v: any) => {
-        const pid = assignments[v.id]
-        if (pid && map[pid]) {
-          map[pid].push(v)
-        }
-      })
+    safeProducts.forEach((p: any) => {
+      map[p.id] = []
+    })
+    safeVehicles.forEach((v: any) => {
+      const pid = assignments[v.id]
+      if (pid && map[pid]) {
+        map[pid].push(v)
+      }
+    })
     return map
-  }, [vehicles, assignments, products])
+  }, [safeVehicles, assignments, safeProducts])
 
   // Handler for assigning a vehicle to a product
   const handleAssign = (vehicleId: string, productId: string) => {
@@ -48,7 +52,7 @@ export const QuoteBuilder: FC = () => {
   }
 
   // Validation: all vehicles assigned?
-  const allAssigned = vehicles.length > 0 && unassignedVehicles.length === 0
+  const allAssigned = safeVehicles.length > 0 && unassignedVehicles.length === 0
 
   return (
     <DndProvider backend={HTML5Backend}>
@@ -60,7 +64,7 @@ export const QuoteBuilder: FC = () => {
         <div style={{ flex: 2 }}>
           <h3>Products</h3>
           <ProductList
-            products={products}
+            products={safeProducts}
             vehiclesByProduct={vehiclesByProduct}
             onDropVehicle={handleAssign}
           />
