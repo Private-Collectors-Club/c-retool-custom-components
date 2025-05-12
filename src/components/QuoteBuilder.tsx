@@ -1,4 +1,4 @@
-import { FC, useMemo } from 'react'
+import { FC, useState } from 'react'
 import { Retool } from '@tryretool/custom-component-support'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
@@ -11,10 +11,7 @@ export const QuoteBuilder: FC = () => {
   const [products] = Retool.useStateArray({ name: 'products' })
 
   // assignments: { [vehicleId]: productId }
-  const [assignments, setAssignments] = Retool.useStateObject({
-    name: 'assignments',
-    initialValue: {},
-  })
+  const [assignments, setAssignments] = useState<Record<string, string>>({})
 
   // Always use safe arrays for vehicles/products
   const safeVehicles = Array.isArray(vehicles) ? vehicles : []
