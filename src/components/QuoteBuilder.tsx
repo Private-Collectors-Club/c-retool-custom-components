@@ -51,6 +51,13 @@ export const QuoteBuilder: FC = () => {
     setAssignments({ ...assignments, [vehicleId]: productId })
   }
 
+  // Handler for unassigning a vehicle (move back to unassigned)
+  const handleUnassign = (vehicleId: string) => {
+    const newAssignments = { ...assignments }
+    delete newAssignments[vehicleId]
+    setAssignments(newAssignments)
+  }
+
   // Validation: all vehicles assigned?
   const allAssigned = safeVehicles.length > 0 && unassignedVehicles.length === 0
 
@@ -59,7 +66,7 @@ export const QuoteBuilder: FC = () => {
       <div style={{ display: 'flex', gap: 32, alignItems: 'flex-start' }}>
         <div style={{ flex: 1 }}>
           <h3>Vehicles</h3>
-          <VehicleList vehicles={unassignedVehicles} />
+          <VehicleList vehicles={unassignedVehicles} onDropUnassign={handleUnassign} />
         </div>
         <div style={{ flex: 2 }}>
           <h3>Products</h3>

@@ -1,15 +1,23 @@
 import { FC } from 'react'
-import { useDrag } from 'react-dnd'
+import { useDrag, useDrop } from 'react-dnd'
 
 interface VehicleListProps {
   vehicles: any[]
+  onDropUnassign?: (vehicleId: string) => void
 }
 
 const VEHICLE_TYPE = 'VEHICLE'
 
-export const VehicleList: FC<VehicleListProps> = ({ vehicles }) => {
+export const VehicleList: FC<VehicleListProps> = ({ vehicles, onDropUnassign }) => {
+  const [, drop] = useDrop({
+    accept: VEHICLE_TYPE,
+    drop: (item: { id: string }) => {
+      if (onDropUnassign) onDropUnassign(item.id)
+    },
+  })
+
   return (
-    <div>
+    <div ref={drop}>
       {vehicles.length === 0 && <div>No unassigned vehicles.</div>}
       {vehicles.map((vehicle) => (
         <DraggableVehicle key={vehicle.id} vehicle={vehicle} />
