@@ -45,4 +45,4 @@ export const DraggableVehicle: FC<{ vehicle: any }> = ({ vehicle }) => {
   )
 }
 
-export { VEHICLE_TYPE, DraggableVehicle }
+export { VEHICLE_TYPE }
