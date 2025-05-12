@@ -39,7 +39,7 @@ export const QuoteBuilder: FC = () => {
     })
     safeVehicles.forEach((v: any) => {
       const pid = assignments[v.id]
-      if (pid && map[pid]) {
+      if (typeof pid === 'string' && map[pid]) {
         map[pid].push(v)
       }
     })
