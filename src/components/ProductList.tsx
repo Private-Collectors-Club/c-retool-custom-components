@@ -67,7 +67,7 @@ const ProductDropZone: FC<{
         <div style={{ color: '#888', fontStyle: 'italic' }}>No vehicles assigned</div>
       ) : (
         vehicles.map((v) => (
-          <div key={v.id} style={{ display: 'flex', alignItems: 'center', marginBottom: 6 }}>
+          <div key={v.vehicle_id} style={{ display: 'flex', alignItems: 'center', marginBottom: 6 }}>
             <div style={{ flex: 1, display: 'flex', alignItems: 'center' }}>
               <DraggableVehicle vehicle={v} dragOnlyName />
             </div>
@@ -80,7 +80,7 @@ const ProductDropZone: FC<{
                 background: '#f5f5f5',
                 cursor: 'pointer',
               }}
-              onClick={() => onUnassignVehicle(v.id)}
+              onClick={() => onUnassignVehicle(v.vehicle_id)}
               title="Unassign"
             >
               Unassign

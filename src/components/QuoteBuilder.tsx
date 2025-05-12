@@ -24,8 +24,8 @@ export const QuoteBuilder: FC = () => {
   const unassignedVehicles =
     safeVehicles.filter(
       (v: any) =>
-        !Object.prototype.hasOwnProperty.call(assignments, v.id) ||
-        !safeProducts.some((p: any) => p.id === assignments[v.id])
+        !Object.prototype.hasOwnProperty.call(assignments, v.vehicle_id) ||
+        !safeProducts.some((p: any) => p.id === assignments[v.vehicle_id])
     )
 
   // Compute assigned vehicles per product
@@ -35,7 +35,7 @@ export const QuoteBuilder: FC = () => {
       map[p.id] = []
     })
     safeVehicles.forEach((v: any) => {
-      const pid = assignments[v.id]
+      const pid = assignments[v.vehicle_id]
       if (typeof pid === 'string' && map[pid]) {
         map[pid].push(v)
       }

@@ -25,7 +25,7 @@ export const VehicleList: FC<VehicleListProps> = ({ vehicles }) => {
         <div style={{ color: '#888', fontStyle: 'italic' }}>No unassigned vehicles.</div>
       )}
       {vehicles.map((vehicle) => (
-        <DraggableVehicle key={vehicle.id} vehicle={vehicle} />
+        <DraggableVehicle key={vehicle.vehicle_id} vehicle={vehicle} />
       ))}
     </div>
   )
@@ -34,7 +34,7 @@ export const VehicleList: FC<VehicleListProps> = ({ vehicles }) => {
 export const DraggableVehicle: FC<{ vehicle: any; dragOnlyName?: boolean }> = ({ vehicle, dragOnlyName }) => {
   const [{ isDragging }, drag] = useDrag({
     type: VEHICLE_TYPE,
-    item: { id: vehicle.id },
+    item: { id: vehicle.vehicle_id },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
