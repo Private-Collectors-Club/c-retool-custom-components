@@ -30,15 +30,15 @@ export const QuoteBuilder: FC = () => {
   // Compute assigned vehicles per product
   const vehiclesByProduct = useMemo(() => {
     const map: Record<string, any[]> = {}
-    (Array.isArray(products) ? products : []).forEach((p: any) => {
-      map[p.id] = []
-    })
-    (Array.isArray(vehicles) ? vehicles : []).forEach((v: any) => {
-      const pid = assignments[v.id]
-      if (pid && map[pid]) {
-        map[pid].push(v)
-      }
-    })
+      (Array.isArray(products) ? products : []).forEach((p: any) => {
+        map[p.id] = []
+      })
+      (Array.isArray(vehicles) ? vehicles : []).forEach((v: any) => {
+        const pid = assignments[v.id]
+        if (pid && map[pid]) {
+          map[pid].push(v)
+        }
+      })
     return map
   }, [vehicles, assignments, products])
 
