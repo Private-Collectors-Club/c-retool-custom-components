@@ -11,6 +11,7 @@ const VEHICLE_TYPE = 'VEHICLE'
 export const VehicleList: FC<VehicleListProps> = ({ vehicles, onDropUnassign }) => {
   const [{ isOver, canDrop }, drop] = useDrop({
     accept: VEHICLE_TYPE,
+    canDrop: () => true, // Always allow drop to unassigned area
     drop: (item: { id: string }) => {
       if (onDropUnassign) onDropUnassign(item.id)
     },
@@ -20,6 +21,7 @@ export const VehicleList: FC<VehicleListProps> = ({ vehicles, onDropUnassign }) 
     }),
   })
 
+  // Always render the drop zone, even if there are no unassigned vehicles
   return (
     <div
       ref={drop}
@@ -33,13 +35,12 @@ export const VehicleList: FC<VehicleListProps> = ({ vehicles, onDropUnassign }) 
       }}
     >
       <div style={{ fontWeight: 600, marginBottom: 8 }}>Unassigned Vehicles</div>
-      {vehicles.length === 0 ? (
+      {vehicles.length === 0 && (
         <div style={{ color: '#888', fontStyle: 'italic' }}>No unassigned vehicles.</div>
-      ) : (
-        vehicles.map((vehicle) => (
-          <DraggableVehicle key={vehicle.id} vehicle={vehicle} />
-        ))
       )}
+      {vehicles.map((vehicle) => (
+        <DraggableVehicle key={vehicle.id} vehicle={vehicle} />
+      ))}
       {isOver && canDrop && (
         <div style={{ color: '#007bff', marginTop: 8 }}>Release to unassign</div>
       )}
