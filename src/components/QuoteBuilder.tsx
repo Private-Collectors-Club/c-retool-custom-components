@@ -16,10 +16,22 @@ export const QuoteBuilder: FC = () => {
     initialValue: [],
   })
 
+  // Type guard for assignment objects
+  function isAssignment(obj: any): obj is { product_id: string, vehicle_ids: string[] } {
+    return (
+      obj &&
+      typeof obj === 'object' &&
+      typeof obj.product_id === 'string' &&
+      Array.isArray(obj.vehicle_ids)
+    )
+  }
+
   // Always use safe arrays for vehicles/products/assignments
   const safeVehicles = Array.isArray(vehicles) ? vehicles : []
   const safeProducts = Array.isArray(products) ? products : []
-  const safeAssignments = Array.isArray(assignments) ? assignments : []
+  const safeAssignments = Array.isArray(assignments)
+    ? assignments.filter(isAssignment)
+    : []
 
   // Compute assigned vehicles per product
   const vehiclesByProduct: Record<string, any[]> = {}

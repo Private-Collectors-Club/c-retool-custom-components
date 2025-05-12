@@ -50,7 +50,7 @@ export const DraggableVehicle: FC<{ vehicle: any; dragOnlyName?: boolean }> = ({
           fontWeight: 500,
         }}
       >
-        {vehicle.vehicle_name || vehicle.id}
+        {vehicle.vehicle_name || vehicle.vehicle_id}
       </span>
     )
   }
@@ -68,7 +68,7 @@ export const DraggableVehicle: FC<{ vehicle: any; dragOnlyName?: boolean }> = ({
         cursor: 'grab',
       }}
     >
-      {vehicle.vehicle_name || vehicle.id}
+      {vehicle.vehicle_name || vehicle.vehicle_id}
     </div>
   )
 }
