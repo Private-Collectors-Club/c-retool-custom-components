@@ -49,6 +49,9 @@ export const DraggableVehicle: FC<{
     <div
       ref={drag}
       style={{
+        display: 'flex',
+        alignItems: 'center',
+        width: '100%',
         opacity: isDragging ? 0.5 : 1,
         border: '1px solid #ccc',
         borderRadius: 4,
@@ -58,7 +61,9 @@ export const DraggableVehicle: FC<{
         cursor: 'grab',
       }}
     >
-      {vehicle.vehicle_name || vehicle.vehicle_id}
+      <span style={{ flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+        {vehicle.vehicle_name || vehicle.vehicle_id}
+      </span>
       {onUnassignVehicle && (
         <button
           style={{
