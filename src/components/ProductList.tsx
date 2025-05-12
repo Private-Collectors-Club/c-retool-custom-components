@@ -1,0 +1,82 @@
+import { FC } from 'react'
+import { useDrop } from 'react-dnd'
+import { VEHICLE_TYPE } from './VehicleList'
+
+interface ProductListProps {
+  products: any[]
+  vehiclesByProduct: Record<string, any[]>
+  onDropVehicle: (vehicleId: string, productId: string) => void
+}
+
+export const ProductList: FC<ProductListProps> = ({
+  products,
+  vehiclesByProduct,
+  onDropVehicle,
+}) => {
+  return (
+    <div style={{ display: 'flex', gap: 24 }}>
+      {products.map((product) => (
+        <ProductDropZone
+          key={product.id}
+          product={product}
+          vehicles={vehiclesByProduct[product.id] || []}
+          onDropVehicle={onDropVehicle}
+        />
+      ))}
+    </div>
+  )
+}
+
+const ProductDropZone: FC<{
+  product: any
+  vehicles: any[]
+  onDropVehicle: (vehicleId: string, productId: string) => void
+}> = ({ product, vehicles, onDropVehicle }) => {
+  const [{ isOver, canDrop }, drop] = useDrop({
+    accept: VEHICLE_TYPE,
+    drop: (item: { id: string }) => {
+      onDropVehicle(item.id, product.id)
+    },
+    collect: (monitor) => ({
+      isOver: monitor.isOver(),
+      canDrop: monitor.canDrop(),
+    }),
+  })
+
+  return (
+    <div
+      ref={drop}
+      style={{
+        minWidth: 200,
+        minHeight: 120,
+        border: `2px dashed ${isOver ? '#007bff' : '#ccc'}`,
+        borderRadius: 6,
+        padding: 12,
+        background: isOver ? '#e6f0ff' : '#fafbfc',
+        transition: 'background 0.2s, border 0.2s',
+      }}
+    >
+      <div style={{ fontWeight: 600, marginBottom: 8 }}>
+        {product.name || product.id}
+      </div>
+      {vehicles.length === 0 ? (
+        <div style={{ color: '#888', fontStyle: 'italic' }}>No vehicles assigned</div>
+      ) : (
+        vehicles.map((v) => (
+          <div
+            key={v.id}
+            style={{
+              border: '1px solid #eee',
+              borderRadius: 4,
+              padding: 6,
+              marginBottom: 6,
+              background: '#fff',
+            }}
+          >
+            {v.name || v.id}
+          </div>
+        ))
+      )}
+    </div>
+  )
+}
