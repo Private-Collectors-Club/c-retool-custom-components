@@ -56,7 +56,9 @@ export const QuoteBuilder: FC = () => {
     const newAssignments = { ...assignments }
     // log out  vehicleId
     console.log('Unassigning vehicle:', vehicleId)
+    console.log('before:', newAssignments)
     delete newAssignments[vehicleId]
+    console.log('after:', newAssignments)
     setAssignments(newAssignments)
   }
 
