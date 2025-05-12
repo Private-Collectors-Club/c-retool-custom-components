@@ -51,6 +51,7 @@ const ProductDropZone: FC<{
     <div
       ref={drop}
       style={{
+        flex: 1,
         minWidth: 200,
         minHeight: 120,
         border: `2px dashed ${isOver ? '#007bff' : '#ccc'}`,

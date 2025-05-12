@@ -51,7 +51,6 @@ export const DraggableVehicle: FC<{
       style={{
         display: 'flex',
         alignItems: 'center',
-        width: '100%',
         opacity: isDragging ? 0.5 : 1,
         border: '1px solid #ccc',
         borderRadius: 4,
@@ -67,6 +66,8 @@ export const DraggableVehicle: FC<{
       {onUnassignVehicle && (
         <button
           style={{
+            flex: 1,
+            flexGrow: 0,
             marginLeft: 8,
             padding: '2px 8px',
             border: '1px solid #ccc',
