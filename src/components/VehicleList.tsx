@@ -4,11 +4,12 @@ import { useDrag, useDrop } from 'react-dnd'
 interface VehicleListProps {
   vehicles: any[]
   onDropUnassign?: (vehicleId: string) => void
+  onUnassignVehicle?: (vehicleId: string) => void
 }
 
 const VEHICLE_TYPE = 'VEHICLE'
 
-export const VehicleList: FC<VehicleListProps> = ({ vehicles }) => {
+export const VehicleList: FC<VehicleListProps> = ({ vehicles, onUnassignVehicle }) => {
   return (
     <div
       style={{
@@ -25,7 +26,7 @@ export const VehicleList: FC<VehicleListProps> = ({ vehicles }) => {
         <div style={{ color: '#888', fontStyle: 'italic' }}>No unassigned vehicles.</div>
       )}
       {vehicles.map((vehicle) => (
-        <DraggableVehicle key={vehicle.vehicle_id} vehicle={vehicle} onUnassignVehicle={} />
+        <DraggableVehicle key={vehicle.vehicle_id} vehicle={vehicle} onUnassignVehicle={onUnassignVehicle} />
       ))}
     </div>
   )
@@ -34,7 +35,7 @@ export const VehicleList: FC<VehicleListProps> = ({ vehicles }) => {
 export const DraggableVehicle: FC<{
   vehicle: any
   dragOnlyName?: boolean
-  onUnassignVehicle: (vehicleId: string) => void
+  onUnassignVehicle?: (vehicleId: string) => void
 }> = ({ vehicle, onUnassignVehicle }) => {
   const [{ isDragging }, drag] = useDrag({
     type: VEHICLE_TYPE,
@@ -58,20 +59,22 @@ export const DraggableVehicle: FC<{
       }}
     >
       {vehicle.vehicle_name || vehicle.vehicle_id}
-      <button
-        style={{
-          marginLeft: 8,
-          padding: '2px 8px',
-          border: '1px solid #ccc',
-          borderRadius: 4,
-          background: '#f5f5f5',
-          cursor: 'pointer',
-        }}
-        onClick={() => onUnassignVehicle(vehicle.vehicle_id)}
-        title="Unassign"
-      >
-        Unassign
-      </button>
+      {onUnassignVehicle && (
+        <button
+          style={{
+            marginLeft: 8,
+            padding: '2px 8px',
+            border: '1px solid #ccc',
+            borderRadius: 4,
+            background: '#f5f5f5',
+            cursor: 'pointer',
+          }}
+          onClick={() => onUnassignVehicle(vehicle.vehicle_id)}
+          title="Unassign"
+        >
+          Unassign
+        </button>
+      )}
     </div>
   )
 }
