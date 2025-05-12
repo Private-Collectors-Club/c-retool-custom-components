@@ -51,17 +51,16 @@ export const QuoteBuilder: FC = () => {
   const handleAssign = (vehicleId: string, productId: string) => {
     // Remove any existing assignment for this vehicle
     const filtered = safeAssignments.filter((a: any) => a.vehicle_id !== vehicleId)
-    setAssignments([...filtered, { vehicle_id: vehicleId, product_id: productId }])
+    const newAssignments = [...filtered, { vehicle_id: vehicleId, product_id: productId }]
+    setAssignments(newAssignments)
+    console.log('Assignments after assign:', newAssignments)
   }
 
   // Handler for unassigning a vehicle (move back to unassigned)
   const handleUnassign = (vehicleId: string) => {
     const filtered = safeAssignments.filter((a: any) => a.vehicle_id !== vehicleId)
-    // log out  vehicleId
-    console.log('Unassigning vehicle:', vehicleId)
-    console.log('before:', safeAssignments)
-    console.log('after:', filtered)
     setAssignments(filtered)
+    console.log('Assignments after unassign:', filtered)
   }
 
   // Validation: all vehicles assigned?
