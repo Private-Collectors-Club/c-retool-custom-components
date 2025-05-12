@@ -16,7 +16,7 @@ export const ProductList: FC<ProductListProps> = ({
   onUnassignVehicle,
 }) => {
   return (
-    <div style={{ display: 'flex', gap: 24 }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
       {products.map((product) => (
         <ProductDropZone
           key={product.id}
