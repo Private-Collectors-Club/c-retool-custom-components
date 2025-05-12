@@ -74,6 +74,7 @@ export const QuoteBuilder: FC = () => {
             products={safeProducts}
             vehiclesByProduct={vehiclesByProduct}
             onDropVehicle={handleAssign}
+            onUnassignVehicle={handleUnassign}
           />
         </div>
       </div>

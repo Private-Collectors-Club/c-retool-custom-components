@@ -6,12 +6,14 @@ interface ProductListProps {
   products: any[]
   vehiclesByProduct: Record<string, any[]>
   onDropVehicle: (vehicleId: string, productId: string) => void
+  onUnassignVehicle: (vehicleId: string) => void
 }
 
 export const ProductList: FC<ProductListProps> = ({
   products,
   vehiclesByProduct,
   onDropVehicle,
+  onUnassignVehicle,
 }) => {
   return (
     <div style={{ display: 'flex', gap: 24 }}>
@@ -21,6 +23,7 @@ export const ProductList: FC<ProductListProps> = ({
           product={product}
           vehicles={vehiclesByProduct[product.id] || []}
           onDropVehicle={onDropVehicle}
+          onUnassignVehicle={onUnassignVehicle}
         />
       ))}
     </div>
@@ -31,7 +34,8 @@ const ProductDropZone: FC<{
   product: any
   vehicles: any[]
   onDropVehicle: (vehicleId: string, productId: string) => void
-}> = ({ product, vehicles, onDropVehicle }) => {
+  onUnassignVehicle: (vehicleId: string) => void
+}> = ({ product, vehicles, onDropVehicle, onUnassignVehicle }) => {
   const [{ isOver, canDrop }, drop] = useDrop({
     accept: VEHICLE_TYPE,
     drop: (item: { id: string }) => {
@@ -63,7 +67,23 @@ const ProductDropZone: FC<{
         <div style={{ color: '#888', fontStyle: 'italic' }}>No vehicles assigned</div>
       ) : (
         vehicles.map((v) => (
-          <DraggableVehicle key={v.id} vehicle={v} />
+          <div key={v.id} style={{ display: 'flex', alignItems: 'center', marginBottom: 6 }}>
+            <DraggableVehicle vehicle={v} />
+            <button
+              style={{
+                marginLeft: 8,
+                padding: '2px 8px',
+                border: '1px solid #ccc',
+                borderRadius: 4,
+                background: '#f5f5f5',
+                cursor: 'pointer',
+              }}
+              onClick={() => onUnassignVehicle(v.id)}
+              title="Unassign"
+            >
+              Unassign
+            </button>
+          </div>
         ))
       )}
     </div>
