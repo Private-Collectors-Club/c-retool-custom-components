@@ -10,22 +10,26 @@ export const QuoteBuilder: FC = () => {
   const [vehicles] = Retool.useStateArray({ name: 'vehicles' })
   const [products] = Retool.useStateArray({ name: 'products' })
 
-  // assignments: { [vehicleId]: productId }
-  const [assignments, setAssignments] = Retool.useStateObject({
+  // assignments: Array<{ vehicle_id: string, product_id: string }>
+  const [assignments, setAssignments] = Retool.useStateArray({
     name: 'assignments',
-    initialValue: {},
+    initialValue: [],
   })
 
-  // Always use safe arrays for vehicles/products
+  // Always use safe arrays for vehicles/products/assignments
   const safeVehicles = Array.isArray(vehicles) ? vehicles : []
   const safeProducts = Array.isArray(products) ? products : []
+  const safeAssignments = Array.isArray(assignments) ? assignments : []
 
   // Compute unassigned vehicles
   const unassignedVehicles =
     safeVehicles.filter(
       (v: any) =>
-        !Object.prototype.hasOwnProperty.call(assignments, v.vehicle_id) ||
-        !safeProducts.some((p: any) => p.id === assignments[v.vehicle_id])
+        !safeAssignments.some(
+          (a: any) =>
+            a.vehicle_id === v.vehicle_id &&
+            safeProducts.some((p: any) => p.id === a.product_id)
+        )
     )
 
   // Compute assigned vehicles per product
@@ -34,10 +38,10 @@ export const QuoteBuilder: FC = () => {
     safeProducts.forEach((p: any) => {
       map[p.id] = []
     })
-    safeVehicles.forEach((v: any) => {
-      const pid = assignments[v.vehicle_id]
-      if (typeof pid === 'string' && map[pid]) {
-        map[pid].push(v)
+    safeAssignments.forEach((a: any) => {
+      const vehicle = safeVehicles.find((v: any) => v.vehicle_id === a.vehicle_id)
+      if (vehicle && map[a.product_id]) {
+        map[a.product_id].push(vehicle)
       }
     })
     return map
@@ -45,18 +49,19 @@ export const QuoteBuilder: FC = () => {
 
   // Handler for assigning a vehicle to a product
   const handleAssign = (vehicleId: string, productId: string) => {
-    setAssignments({ ...assignments, [vehicleId]: productId })
+    // Remove any existing assignment for this vehicle
+    const filtered = safeAssignments.filter((a: any) => a.vehicle_id !== vehicleId)
+    setAssignments([...filtered, { vehicle_id: vehicleId, product_id: productId }])
   }
 
   // Handler for unassigning a vehicle (move back to unassigned)
   const handleUnassign = (vehicleId: string) => {
-    const newAssignments = { ...assignments }
+    const filtered = safeAssignments.filter((a: any) => a.vehicle_id !== vehicleId)
     // log out  vehicleId
     console.log('Unassigning vehicle:', vehicleId)
-    console.log('before:', newAssignments)
-    delete newAssignments[vehicleId]
-    console.log('after:', newAssignments)
-    setAssignments(newAssignments)
+    console.log('before:', safeAssignments)
+    console.log('after:', filtered)
+    setAssignments(filtered)
   }
 
   // Validation: all vehicles assigned?
