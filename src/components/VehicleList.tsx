@@ -25,13 +25,17 @@ export const VehicleList: FC<VehicleListProps> = ({ vehicles }) => {
         <div style={{ color: '#888', fontStyle: 'italic' }}>No unassigned vehicles.</div>
       )}
       {vehicles.map((vehicle) => (
-        <DraggableVehicle key={vehicle.vehicle_id} vehicle={vehicle} />
+        <DraggableVehicle key={vehicle.vehicle_id} vehicle={vehicle} onUnassignVehicle={} />
       ))}
     </div>
   )
 }
 
-export const DraggableVehicle: FC<{ vehicle: any; dragOnlyName?: boolean }> = ({ vehicle, dragOnlyName }) => {
+export const DraggableVehicle: FC<{
+  vehicle: any
+  dragOnlyName?: boolean
+  onUnassignVehicle: (vehicleId: string) => void
+}> = ({ vehicle, onUnassignVehicle }) => {
   const [{ isDragging }, drag] = useDrag({
     type: VEHICLE_TYPE,
     item: { id: vehicle.vehicle_id },
@@ -39,21 +43,6 @@ export const DraggableVehicle: FC<{ vehicle: any; dragOnlyName?: boolean }> = ({
       isDragging: monitor.isDragging(),
     }),
   })
-
-  if (dragOnlyName) {
-    return (
-      <span
-        ref={drag}
-        style={{
-          opacity: isDragging ? 0.5 : 1,
-          cursor: 'grab',
-          fontWeight: 500,
-        }}
-      >
-        {vehicle.vehicle_name || vehicle.vehicle_id}
-      </span>
-    )
-  }
 
   return (
     <div
@@ -69,6 +58,20 @@ export const DraggableVehicle: FC<{ vehicle: any; dragOnlyName?: boolean }> = ({
       }}
     >
       {vehicle.vehicle_name || vehicle.vehicle_id}
+      <button
+        style={{
+          marginLeft: 8,
+          padding: '2px 8px',
+          border: '1px solid #ccc',
+          borderRadius: 4,
+          background: '#f5f5f5',
+          cursor: 'pointer',
+        }}
+        onClick={() => onUnassignVehicle(vehicle.vehicle_id)}
+        title="Unassign"
+      >
+        Unassign
+      </button>
     </div>
   )
 }

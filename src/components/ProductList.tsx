@@ -74,25 +74,7 @@ const ProductDropZone: FC<{
         <div style={{ color: '#888', fontStyle: 'italic' }}>No vehicles assigned</div>
       ) : (
         vehicles.map((v) => (
-          <div key={v.vehicle_id} style={{ display: 'flex', alignItems: 'center', marginBottom: 6 }}>
-            <div style={{ flex: 1, display: 'flex', alignItems: 'center' }}>
-              <DraggableVehicle vehicle={v} dragOnlyName />
-            </div>
-            <button
-              style={{
-                marginLeft: 8,
-                padding: '2px 8px',
-                border: '1px solid #ccc',
-                borderRadius: 4,
-                background: '#f5f5f5',
-                cursor: 'pointer',
-              }}
-              onClick={() => onUnassignVehicle(v.vehicle_id)}
-              title="Unassign"
-            >
-              Unassign
-            </button>
-          </div>
+          <DraggableVehicle vehicle={v} dragOnlyName onUnassignVehicle={onUnassignVehicle} />
         ))
       )}
     </div>

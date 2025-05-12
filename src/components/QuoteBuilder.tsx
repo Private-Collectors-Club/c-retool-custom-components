@@ -39,8 +39,8 @@ export const QuoteBuilder: FC = () => {
     const assignment = safeAssignments.find((a: any) => a.product_id === p.id)
     vehiclesByProduct[p.id] = assignment
       ? assignment.vehicle_ids.map((vid: string) =>
-          safeVehicles.find((v: any) => v.vehicle_id === vid)
-        ).filter(Boolean)
+        safeVehicles.find((v: any) => v.vehicle_id === vid)
+      ).filter(Boolean)
       : []
   })
 
