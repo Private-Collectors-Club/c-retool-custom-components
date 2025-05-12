@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { useDrop } from 'react-dnd'
-import { VEHICLE_TYPE } from './VehicleList'
+import { VEHICLE_TYPE, DraggableVehicle } from './VehicleList'
 
 interface ProductListProps {
   products: any[]
@@ -63,18 +63,7 @@ const ProductDropZone: FC<{
         <div style={{ color: '#888', fontStyle: 'italic' }}>No vehicles assigned</div>
       ) : (
         vehicles.map((v) => (
-          <div
-            key={v.id}
-            style={{
-              border: '1px solid #eee',
-              borderRadius: 4,
-              padding: 6,
-              marginBottom: 6,
-              background: '#fff',
-            }}
-          >
-            {v.name || v.id}
-          </div>
+          <DraggableVehicle key={v.id} vehicle={v} />
         ))
       )}
     </div>

@@ -18,7 +18,7 @@ export const VehicleList: FC<VehicleListProps> = ({ vehicles }) => {
   )
 }
 
-const DraggableVehicle: FC<{ vehicle: any }> = ({ vehicle }) => {
+export const DraggableVehicle: FC<{ vehicle: any }> = ({ vehicle }) => {
   const [{ isDragging }, drag] = useDrag({
     type: VEHICLE_TYPE,
     item: { id: vehicle.id },
@@ -45,4 +45,4 @@ const DraggableVehicle: FC<{ vehicle: any }> = ({ vehicle }) => {
   )
 }
 
-export { VEHICLE_TYPE }
+export { VEHICLE_TYPE, DraggableVehicle }
